@@ -1,4 +1,4 @@
-# Industrial-project-for-production-lane-inspection-and-counting-
+# Industrial-project-for-production-lane-inspection-and-counting
 Industrial project  for production lane inspection and counting 
 
 #inspection of missing and missing entities using the Yolo model object detection method.#
