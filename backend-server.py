@@ -3,22 +3,18 @@ import numpy as np
 import base64
 import uvicorn
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, File, UploadFile
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from typing import List
 
 
 class ImageRequest(BaseModel):
     image: str
-    threshold_val: int
-    user_message: str
-    # dummy_array: List[int]
-    
+   
 
 def load_model(model_path='best.onnx'):
     return cv2.dnn.readNetFromONNX(model_path)
 
-def load_classes(file_path='detectionn.names'):
+def load_classes(file_path='detection.names'):
     with open(file_path, 'r') as file:
         return [line.strip() for line in file.readlines()]
 
@@ -53,6 +49,8 @@ def perform_detection(frame, net, classes, confidence_threshold=0.5, nms_thresho
     indices = cv2.dnn.NMSBoxes(boxes, confidences, confidence_threshold, nms_threshold)
     return [(boxes[i], classes[class_ids[i]], confidences[i]) for i in indices]
 
+# draw boxes
+
 
 def draw_boxes(frame, detections):
     label_color = {
@@ -62,7 +60,7 @@ def draw_boxes(frame, detections):
     cords = []
     lab_list = []
 
-    for box, label, confidence in detections:
+    for box, label,_ in detections:
         x1, y1, w, h = box
         lab = label
         lab_list.append(lab)
@@ -83,27 +81,28 @@ def draw_boxes(frame, detections):
     # Count "Open" and "Closed" instances
     open_count = lab_list.count("Open")
     closed_count = lab_list.count("Closed")
-    count_color = (255, 255, 255)  # White for count values
 
     # Define text properties
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = 1
-    thickness = 2
+    thickness = 5
     line_type = cv2.LINE_AA
 
-    # Get text size for positioning "Closed" count
+    # Get text size for positioning counts
     text_size_open = cv2.getTextSize(f'Open:{open_count}', font, font_scale, thickness)[0]
     text_size_closed = cv2.getTextSize(f'Closed:{closed_count}', font, font_scale, thickness)[0]
+
+    # Calculate positions for counts
+    open_text_y = 30 + text_size_open[1]  # Top left corner for "Open" count
+    closed_text_y = open_text_y + text_size_closed[1] + 10  # Below the "Open" count with spacing
 
     # Draw "Open" count at the top left corner
     cv2.putText(frame, f'Open:{open_count}', (10, 30), font, font_scale, (0, 0, 255), thickness, line_type)
 
-    # Calculate position for "Closed" count
-    closed_text_y = 35 + text_size_open[1] + 10  # Below the "Open" count with some spacing
-
     # Draw "Closed" count below the "Open" count
     cv2.putText(frame, f'Closed:{closed_count}', (10, closed_text_y), font, font_scale, (0, 255, 0), thickness,
                 line_type)
+
 
 app = FastAPI()
 
@@ -131,17 +130,19 @@ async def predictions(request: ImageRequest):
 
         if frame is None:
             raise HTTPException(status_code=400, detail="Failed to load the image. Please provide a valid image.")
+        
+        # crop the image 100 from h 100 w  both side 
+        frame = frame[100:-100, 100:-100]
+
+        # Resize the image 640 640 
+        frame = cv2.resize(frame, (640, 640))
 
         # Perform object detection
         detections = perform_detection(frame, net, classes)
         draw_boxes(frame, detections)
-        # save image after detection 
-        #processed_img_path = "annotated_image.jpg"   
-        #processed_img= cv2.imwrite(processed_img_path, frame)
-
-        # print type of processed image
-        #print(type(processed_img))
-        #print(processed_img)
+        
+        # Save annotated image to file
+        cv2.imwrite('annotated_image.jpg', frame)
        
         # Count "Open" and "Closed" instances
         open_count = sum(label == "Open" for _, label, _ in detections)
@@ -153,18 +154,14 @@ async def predictions(request: ImageRequest):
         # Encode annotated image to base64
         _, img_encoded = cv2.imencode('.jpg',frame)
         img_base64 = base64.b64encode(img_encoded).decode('utf-8')
-        # dummy_array = request.dummy_array
-        user_message = request.user_message
-        user_message = 'Congratulation You have done ->' + user_message
-        threshold_val = request.threshold_val
-        threshold_val += 5
+       
        
         # Response data
         response_data = {
             "image": img_base64,
-            "threshold_val":threshold_val,
-            "user_message": user_message    
-            
+            "status": status,
+            "open_count": open_count,
+            "closed_count": closed_count
         }
 
         return JSONResponse(content=response_data)
@@ -174,4 +171,4 @@ async def predictions(request: ImageRequest):
 
 if __name__ == "__main__":
     #uvicorn.run(app, host="127.0.0.1", port=5000)
-    uvicorn.run("backend-server:app", host="127.0.0.1", port=5000 ,reload=True) #"backend-server:app"
+    uvicorn.run("backend_server_1:app", host="127.0.0.1", port=5000 ,reload=True) #"backend-server:app"
