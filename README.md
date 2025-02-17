@@ -13,6 +13,19 @@ The system is designed to **automatically inspect and count oil cans** in a cont
 - The image is processed in real time to check for missing cans's caps .  
 
 ### **Step 2: Object Detection & Counting**  
+ **Input image 1 OK Image **
+ ![ok_image](https://github.com/user-attachments/assets/0183a61a-9b3a-4488-8e7f-5b1339866fde)
+ **Input image 2 NG Image **
+ ![ng_image](https://github.com/user-attachments/assets/7f46fffa-755a-4efa-b5d7-13717f4413b8)
+******************************************************************************************************************
+##  **Output image 1  OK Image **
+![detection__image1_frame](https://github.com/user-attachments/assets/4ce6f432-4b0f-47dc-9856-91e53cdd022c)
+
+##  **Output image 2  NG Image **
+![detection__image2_frame](https://github.com/user-attachments/assets/4c9ee09c-bad7-41d1-9521-5efb484a6bd5)
+
+******************************************************************************************************************
+ 
 - The system uses **computer vision (OpenCV) and YOLO object detection** techniques to count the total 6 number of cans in each container.  
 - It classifies the **cans's caps as either "Open" (missing) or "Closed" (present)**.  
 
