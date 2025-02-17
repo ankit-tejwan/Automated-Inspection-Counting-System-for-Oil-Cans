@@ -53,7 +53,6 @@ return JSONResponse(content=response_data)
 ```
 
 ## **4. Technologies Used**  
-- **Hardware:** Industrial Cameras, PLC (if applicable)  
+- **Hardware:** Industrial Cameras[ Hikvision ], PLC 
 - **Software:** OpenCV, FastAPI, Uvicorn  
-- **Database:** Can be integrated for logging results  
-- **Display:** Real-time monitoring on Display monitor  
+  
