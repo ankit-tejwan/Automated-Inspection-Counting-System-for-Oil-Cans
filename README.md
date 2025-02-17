@@ -31,7 +31,7 @@ The system is designed to **automatically inspect and count oil cans** in a cont
 
 ### **Step 5: Alarm & Monitoring System**  
 - If the **status is "NG"**, the system **triggers an alarm** to alert operators.  
-- The inspection results are displayed on a **real-time dashboard** over the **local LAN network**.  
+- The inspection results are displayed on a **real-time dashboard** over the **LCD Display monitor**.  
 
 ## **3. Code Logic Overview**  
 ```python
@@ -54,6 +54,6 @@ return JSONResponse(content=response_data)
 ```
 
 ## **4. Technologies Used**  
-- **Hardware:** Industrial Cameras[ Hikvision ], PLC 
+- **Hardware:** Industrial Cameras[ Hikvision ], PLC ,IR Sensor
 - **Software:** OpenCV, FastAPI, Uvicorn  
   
