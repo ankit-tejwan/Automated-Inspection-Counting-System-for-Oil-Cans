@@ -1,7 +1,8 @@
 **Automated Inspection & Counting System for Oil Cans**  
 
 ## **1. Introduction**  
-This industrial project is developed for **BL Agro Industries**, an **edible oil and food manufacturing company based in Bareilly, India**. Founded in the 1950s, BL Agro has grown from an **oil trading business to a high-quality edible oil producer**.  
+This industrial project is developed for **BL Agro Industries**, an **edible oil and food manufacturing company based in Bareilly, India**. 
+Founded in the 1950s, BL Agro has grown from an **oil trading business to a high-quality edible oil producer**.  
 
 The system is designed to **automatically inspect and count oil cans** in a container. Each container should hold **six cans**. If any cans's caps are missing, the system generates an **"NG" (Not Good) signal**, otherwise, it is marked as **"OK"**.  
 
