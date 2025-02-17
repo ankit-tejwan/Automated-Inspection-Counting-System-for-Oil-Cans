@@ -3,7 +3,7 @@
 ## **1. Introduction**  
 This industrial project is developed for **BL Agro Industries**, an **edible oil and food manufacturing company based in Bareilly, India**. Founded in the 1950s, BL Agro has grown from an **oil trading business to a high-quality edible oil producer**.  
 
-The system is designed to **automatically inspect and count oil cans** in a container. Each container should hold **six cans**. If any cans are missing, the system generates an **"NG" (Not Good) signal**, otherwise, it is marked as **"OK"**.  
+The system is designed to **automatically inspect and count oil cans** in a container. Each container should hold **six cans**. If any cans's caps are missing, the system generates an **"NG" (Not Good) signal**, otherwise, it is marked as **"OK"**.  
 
 ## **2. System Workflow**  
 
@@ -13,12 +13,12 @@ The system is designed to **automatically inspect and count oil cans** in a cont
 
 ### **Step 2: Object Detection & Counting**  
 - The system uses **computer vision (OpenCV) and object detection** techniques to count the number of cans in each container.  
-- It classifies the **cans as either "Open" (missing) or "Closed" (present)**.  
+- It classifies the **cans's caps as either "Open" (missing) or "Closed" (present)**.  
 
 ### **Step 3: Status Determination**  
 - Based on the count, the system determines the **status**:  
-  - **"OK"** → If **all 6 cans** are detected.  
-  - **"NG (Not Good)"** → If **any can is missing**.  
+  - **"OK"** → If **all 6 cans's caps ** are detected.  
+  - **"NG (Not Good)"** → If **any cans's caps are missing**.  
 
 ### **Step 4: Image Encoding & Response Generation**  
 - The **annotated image is encoded to Base64** format for easy transmission.  
