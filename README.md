@@ -8,11 +8,11 @@ The system is designed to **automatically inspect and count oil cans** in a cont
 ## **2. System Workflow**  
 
 ### **Step 1: Container Image Capture**  
-- The **production lane inspection system** captures images of **containers carrying oil cans**.  
-- The image is processed in real time to check for missing cans.  
+- The **production lane inspection system** captures images of ** A containers carrying 6 oil cans**.  
+- The image is processed in real time to check for missing cans's caps .  
 
 ### **Step 2: Object Detection & Counting**  
-- The system uses **computer vision (OpenCV) and object detection** techniques to count the number of cans in each container.  
+- The system uses **computer vision (OpenCV) and YOLO object detection** techniques to count the total 6 number of cans in each container.  
 - It classifies the **cans's caps as either "Open" (missing) or "Closed" (present)**.  
 
 ### **Step 3: Status Determination**  
