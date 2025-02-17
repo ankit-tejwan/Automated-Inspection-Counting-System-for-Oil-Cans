@@ -55,8 +55,6 @@ The system is designed to **automatically inspect and count oil cans** in a cont
 ![image](https://github.com/user-attachments/assets/5a892488-6d4a-469d-80d8-d6afbe932daa)
 
 
-![image](https://github.com/user-attachments/assets/35c800f1-ab3a-4c98-aa5b-8bdac3de35a6)
-
 
 
 ![image](https://github.com/user-attachments/assets/a8768085-f0fa-4332-9abb-82cc1323f87d)
