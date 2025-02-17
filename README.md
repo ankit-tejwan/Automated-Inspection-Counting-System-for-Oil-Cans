@@ -48,7 +48,13 @@ The system is designed to **automatically inspect and count oil cans** in a cont
   - **"OK"** → If **all 6 cans's caps ** are detected.  
   - **"NG (Not Good)"** → If **any cans's caps are missing**.  
 
-### **Step 4: Image Encoding & Response Generation**  
+### **Step 4: Response Generation**  
+### **Responses Snapshots**
+
+![image](https://github.com/user-attachments/assets/a8768085-f0fa-4332-9abb-82cc1323f87d)
+
+
+
 - The **annotated image is encoded to Base64** format for easy transmission.  
 - A **JSON response** is generated with:  
   - **Image (Base64)**  
